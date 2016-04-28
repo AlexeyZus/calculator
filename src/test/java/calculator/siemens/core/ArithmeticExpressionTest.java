@@ -18,8 +18,8 @@ public class ArithmeticExpressionTest {
 
     @Test(expected = NullPointerException.class)
     public void deserialize_null(){
-        ArithmeticExpression expression = new ArithmeticExpressionImpl();
-        expression.deserialize(null);
+        ArithmeticExpression expression1 = new ArithmeticExpressionImpl();
+        expression1.deserialize(null);
     }
 
     @Test
