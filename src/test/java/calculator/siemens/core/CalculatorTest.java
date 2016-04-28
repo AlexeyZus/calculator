@@ -35,16 +35,14 @@ public class CalculatorTest {
 //4
     @Test
     public void calculate_onlyOperations(){
+
+
+
         calculate_fail("+","Invalid set of elements: +"); //
         calculate_fail("-","Invalid set of elements: -");
         calculate_fail("/","Invalid set of elements: /");
         calculate_fail("*","Invalid set of elements: *");
 
-
-       /* CalculatorResult result = calculator.calculate("+");
-        assertNotNull("Result must not be null.",result);
-        assertFalse("Result must be an error.",result.isSuccess());
-        assertEquals("Input expression is not defined",result.getError());*/
     }
 //5
     @Test
