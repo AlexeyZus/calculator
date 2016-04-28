@@ -19,6 +19,7 @@ public class ArithmeticExpressionTest {
     @Test(expected = NullPointerException.class)
     public void deserialize_null(){
         ArithmeticExpression expression1 = new ArithmeticExpressionImpl();
+        System.out.println("");
         expression1.deserialize(null);
     }
 
