@@ -18,9 +18,9 @@ public class ArithmeticExpressionTest {
 
     @Test(expected = NullPointerException.class)
     public void deserialize_null(){
-        ArithmeticExpression expression0 = new ArithmeticExpressionImpl();
+        ArithmeticExpression expression1 = new ArithmeticExpressionImpl();
         System.out.println("");
-        expression0.deserialize(null);
+        expression1.deserialize(null);
     }
 
     @Test
@@ -75,45 +75,4 @@ public class ArithmeticExpressionTest {
         assertNotNull(error);
         assertEquals("Invalid set of elements: 1.+1",error);
     }
-
-
-
-
-
-    /*@Before
-    public void init(){ expression = new ArithmeticExpression();}
-
-    @After
-    public void delete(){ expression = null;}*/
-
-    /*@Test(expected = NullPointerException.class)
-    public void testSetArithmeticExpresionNull() throws Exception {
-        expression.setArithmeticExpresion(null);
-    }*/
-
-    /*@Before
-    public void init(){ expression = new ArithmeticExpression();}
-
-    @After
-    public void delete(){ expression = null;}*/
-
-
-    /*@Test
-    public void testSetArithmeticExpresion() throws Exception {
-        expression = new ArithmeticExpression();
-        expression.setArithmeticExpresion("5+5");
-        assertEquals("5+5",expression.getArithmeticExpresion());
-        expression = null;
-
-    }
-
-    public void testGetArithmeticExpresion() throws Exception {
-        expression = new ArithmeticExpression();
-        expression.setArithmeticExpresion("5+5");
-        assertEquals("5+5",expression.getArithmeticExpresion());
-        expression = null;
-
-    }
-*/
-
 }
