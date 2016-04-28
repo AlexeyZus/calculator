@@ -1,0 +1,337 @@
+
+        /*for (int i = 0; i < arr.length; i++) {
+            if (arr[i].equals("(")) {
+                countBrackets++;
+            }
+            if (countBrackets <= 0 && arr[i].equals(")")) {
+                items = null;
+                //ERROR
+            }
+            if (countBrackets > 0) {
+                if (arr[i].equals(")")) {
+                    if (countBrackets <= 0) {
+                        items = null;
+                        return "\")\" in wrong place.";
+                    }
+                    countBrackets--;
+                    pushStack=true;
+
+                }
+            }
+
+            if (arr[i].equals("+") || arr[i].equals("/") || arr[i].equals("*") || arr[i].equals("-")) {
+
+                stack.push(operationFactory.getOperation(arr[i]));
+            }
+            else {
+                try {
+                    items.add(new Operand(Double.parseDouble(arr[i])));
+                    System.out.println("add double");
+                }
+                catch (NumberFormatException e){
+                    items = null;
+                    System.out.println("!");
+                    return "Uncorrected expression. not apply Double";
+                }
+
+            }
+
+            // get from stack if pushStack==true || "*" || "/"
+
+            if(pushStack==true || arr[i].equals("/") || arr[i].equals("*")){
+                for (int j = 0 ; j != stack.size();){
+                    items.add(stack.pop());
+                    if(j<0)break;
+                }
+            }
+
+            if (i == arr.length - 1 && countBrackets != 0) {
+                items = null;
+                return "Need else \")\"";
+                //ERROR
+            }
+        }
+        for (ArithmeticExpressionItem x : items
+                ) {
+            System.out.println(x.getClass().getSimpleName());
+        }*/
+
+        /*if(operation)
+        items.add(operationFactory.getOperation(""));
+        if()
+        items.add(new ArithmeticExpressionItemImpl());
+        if()
+        items.add(new ArithmeticExpressionItemImpl());
+*/
+
+
+
+
+
+
+
+
+*************************************************************************
+*************************************************************************
+*************************************************************************
+*************************************************************************
+*************************************************************************
+
+
+
+
+
+//******************** проверяем на скобки ***********
+            if(arr[i]=='('){
+                if(stringValue.length()!=0){
+                    try {
+                        items.add(new Operand(Double.parseDouble(stringValue.toString())));
+                        stringValue.delete(0,stringValue.length());
+
+                    }catch (NumberFormatException e){
+                        return "Wrong format of operands.";
+                    }
+                }
+                countBrackets++;
+
+            }
+            if (arr[i]==')' && countBrackets-1>=0){
+                pushStack=true;
+
+            }else if(arr[i]==')' && countBrackets-1<0) {
+                return "Wrong count of \")\".";
+            }
+
+            //******************** проверяем на знаки выражение ***********
+
+            if(arr[i]=='+' || arr[i]=='-' || arr[i]=='*' || arr[i]=='/'){
+                stack.push(operationFactory.getOperation(arr[i]));
+                if(arr[i]=='*' || arr[i]=='/' || pushStack==true){
+                    if(stringValue.length()!=0){
+                        try {
+                            items.add(new Operand(Double.parseDouble(stringValue.toString())));
+                            stringValue.delete(0,stringValue.length());
+
+                        }catch (NumberFormatException e){
+                            return "Wrong format of operands.";
+                        }
+                    }
+
+
+                }
+
+            }
+
+            if(arr[i]=='0' || arr[i]=='1' ||arr[i]=='2' || arr[i]=='3' ||
+                    arr[i]=='4' || arr[i]=='5' || arr[i]=='6' || arr[i]=='7' ||
+                        arr[i]=='8' || arr[i]=='9' || arr[i]=='.'){
+
+                while (true){
+                    stringValue.append(arr[i]);
+
+
+
+                        if (arr[i + 1] == '0' || arr[i + 1] == '1' || arr[i + 1] == '2' || arr[i + 1] == '3' ||
+                                arr[i + 1] == '4' || arr[i + 1] == '5' || arr[i + 1] == '6' || arr[i + 1] == '7' ||
+                                arr[i + 1] == '8' || arr[i + 1] == '9' || arr[i + 1] == '.') {
+                            if(i<arr.length-1) i++;
+
+                        } else break;
+
+                }
+                if(stringValue.length()!=0){
+                    try {
+                        items.add(new Operand(Double.parseDouble(stringValue.toString())));
+                        stringValue.delete(0,stringValue.length());
+                    }catch (NumberFormatException e){
+                        return "Wrong format of operands.";
+                    }
+                }
+            }
+            if (lastChar=='*' || lastChar=='/'){
+                while (!stack.empty()){
+                    items.add(stack.pop());
+                }
+            }
+            lastChar=arr[i];
+
+
+
+
+        }
+
+        for (ArithmeticExpressionItem x : items
+             ) {
+            System.out.println(x.getClass().getSimpleName());
+        }
+
+        ****************************************************************
+        ****************************************************************
+        ****************************************************************
+        ****************************************************************
+        ****************************************************************
+
+
+
+        /*for (int i = 0; i < arr.length; i++) {
+
+                    //если символов ожидаемый
+                    if (checkContainedSymbol(expression, arr[i])) {
+
+                        //если символом является скобка открывающая или закрывающая *****************************************
+                        if (arr[i] == '(') {
+                            //увеличиваем количество требуемых скобок для закрытия
+                            countBrackets++;
+                        } else if (arr[i] == ')' && countBrackets == 0) {
+                            //если еще нет открывающих скобок, но уже появилась закрывающая
+                            //Ошибка. Неправльное расположение скобок.
+                            return "Wrong position of brackets.";
+                        }
+                        //Если есть открывающие скобки и появилась закрывающая, то согласно приоритету скобок вытаскиваем все операции из стека в список элементов варажения.
+                        else if (arr[i] == ')' && countBrackets > 0) {
+                            //если стек не пустой, то вытаскиваем все операции из стека в список элементов выражения
+                            if (!stack.empty()) {
+                                while (!stack.empty()) {
+                                    items.add(stack.pop());
+                                }
+                            }
+                            //уменьшаем количество требуем к закрытию скобок
+                            countBrackets--;
+                        }
+
+                        // если символ является операцией *******************************************************************
+
+                        //Если первый символ один из . ^ ! * /, то возвращается ошибка
+                        if (i == 0 && (arr[i] == '.'|| arr[i] == '!'|| arr[i] == '/'|| arr[i] == '*'|| arr[i] == '^')){
+                            return "Follow char coudn't be first in expression: . ^ ! * /";
+                        }
+
+                        // разбираем выражение на части *********************************************************************
+
+                        // проверяем к чему относится знак
+                        if(arr[i]=='+' || arr[i]=='-' || arr[i]=='*' || arr[i]=='/') {
+                            if ((arr[i] == '*' || arr[i] == '/') && i > 1) {
+
+                            }
+                            //если символ является + или -
+                            if (arr[i] == '+' || arr[i] == '-') {
+                                stack.push(operationFactory.getOperation(arr[i]));
+                                lastSign=arr[i];
+                            }
+
+
+                            if ((arr[i] == '/' || arr[i] == '*' || arr[i] == '*' || arr[i] == '/')
+                                    && stringValue.length()!=0)  {
+                                stringValue.setCharAt();
+
+                            }
+                        }
+
+
+
+
+                    } else {
+                        //если символ не ожидаемый.
+                        return "Expression contained unexpected symbols.";
+                    }
+
+                    //Если количество открывающих скобок не равно количеству закрывающих
+                    if (i == arr.length - 1 && countBrackets != 0) {
+                        return "Wrong count of brackets.";
+
+                    }
+                }*/
+
+                3*-(3-4)
+
+
+
+
+
+******************************************************************************************
+******************************************************************************************
+
+
+
+char[] array = expression.toCharArray();
+        char lastSymbol = ' ';
+        String numbers = "0123456789";
+        String operation1 = "+-";
+        String operation2 = "*/";
+        String brackets = "().";
+        String allSymbols = numbers + operation1 + operation2 + brackets;
+        Stack operandStack = new Stack();
+        Stack<Character> operationStack = new Stack<Character>();
+        Stack<Character> symbolsStack = new Stack<Character>();
+
+        boolean nextSigned = true;
+
+        for (int i = 0; i < array.length; i++) {
+
+            //Проверяем на допустимость символа
+            if (allSymbols.contains(String.valueOf(array[i]))) {
+
+
+                //проверка первого символа
+                if ((array[i] == '*' || array[i] == '/' || array[i] == '.') && i==0) {
+                    if (array[i] == '.') {return "Wrong position of point";}//если на первом месте стоит точка, ERROR!!!
+
+                    if (array[i] == '/' || array[i] == '*') { return "Wrong position of '/' or '*' ";}//если на первом месте стоит / * , ERROR!!!
+                }else{
+                    if(array[i] == '+' || array[i] == '-'){
+                        symbolsStack.push(array[i]);
+                    }
+
+                }
+
+
+
+
+
+
+                lastSymbol = array[i];
+            } else
+
+        }
+
+
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+for (int i = 0; i < items.size(); i++) {
+
+            if (items.get(i) instanceof Operand) {
+                itemList.add(items.get(i));
+
+            } else {
+                if (stackZnak.size() != 0) {
+                    if (i > 0 &&
+                            (stackZnak.peek() instanceof DivOperation || stackZnak.peek() instanceof MultOperation)) {
+
+                        while (!stackZnak.empty()) {
+                            itemList.add(stackZnak.pop());
+                        }
+                        stackZnak.add(items.get(i));
+                    } else {
+                        stackZnak.add(items.get(i));
+                    }
+                }else{
+                    stackZnak.add(items.get(i));
+                }
+            }
+
+            if (i == items.size() - 1) {
+                while (!stackZnak.empty()) {
+                    itemList.add(stackZnak.pop());
+                }
+            }
+        }
+
+        for (int i = 0; i < items.size(); i++) {
+            items.set(i, itemList.get(i));
+        }
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
