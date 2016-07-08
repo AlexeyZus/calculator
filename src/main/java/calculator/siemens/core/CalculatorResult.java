@@ -20,6 +20,9 @@ public class CalculatorResult {
         setSuccess(true);
     }
 
+    public CalculatorResult() {
+    }
+
     public CalculatorResult(String error) {
         this.error = error;
         setSuccess(false);
